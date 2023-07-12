@@ -96,4 +96,5 @@
    <li>11° passo - Criar a pasta template dentro do app filme, nesta pasta terá um padrão para o app filme.</li>
    <li>12° passo - Criar na pasta template raiz, os modelos base HTML para navbar.html e base.html.</li>
    <li>13° passo - editar a base.html. colocando os blocos que se repetirão por toda aplicação, ajustar fazer o front da barra de navegação usado o bootstrap e o tailwindcss</li>
+   <li>14° passo - Editar a homepage, criar divs, botões, inserir imagens, etc, front... atenção para a configurações do taiwind</li>
 </ol>

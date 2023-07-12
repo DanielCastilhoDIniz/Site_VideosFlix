@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+ Homefilmes Castflix    
+{% endblock title %}
+
+{% block content %}
+<div class=" py-10">
+    {% for filme in lista_filmes  %}
+    <hr>
+    <p> {{ filme }}</p>
+    <p> {{ filme.descricao }}</p>
+    <img src="{{ filme.thumb.url}}">
+    {% endfor %}
+
+{% endblock content %}
