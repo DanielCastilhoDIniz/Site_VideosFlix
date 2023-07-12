@@ -7,8 +7,8 @@
 {% endblock title %}
 
 {% block content %}
-<div class=" py-10">
-    {% for filme in lista_filmes  %}
+<div class=" pd-10 px-5">
+    {% for filme in object_list  %}
     <hr>
     <p> {{ filme }}</p>
     <p> {{ filme.descricao }}</p>
