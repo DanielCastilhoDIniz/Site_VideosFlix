@@ -97,4 +97,12 @@
    <li>12° passo - Criar na pasta template raiz, os modelos base HTML para navbar.html e base.html.</li>
    <li>13° passo - editar a base.html. colocando os blocos que se repetirão por toda aplicação, ajustar fazer o front da barra de navegação usado o bootstrap e o tailwindcss</li>
    <li>14° passo - Editar a homepage, criar divs, botões, inserir imagens, etc, front... atenção para a configurações do taiwind</li>
+   <li>15° usnado o class como view: </li>
+     - from django.views.generic import TemplateView, ListView, DetailView
+    <li>16° passo - ajustar urls do app></li>:
+    - urlpatterns = [
+        path('', views.Homepage.as_view(), name='homepage' ),
+        path('filmes/', views.Homefilmes.as_view(), name='homefilmes'),
+        path('filmes/<int:pk>', views.Detalhesfilme.as_view(), name='detalhesfilme')
+        ]
 </ol>
