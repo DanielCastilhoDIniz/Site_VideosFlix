@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+ Homefilmes Castflix    
+{% endblock title %}
+
+{% block content %}
+    <div class="py-14">
+        <h1> Esse é o detalhe do filme {{ object.titulo }} </h1>
+        </p>{{ object }}</p>
+        </p>{{ object.descricao }}</p>
+        <img src="{{ object.thumb.url}}">
+
+    </div>
+   
+   
+
+{% endblock content %}
