@@ -1,4 +1,5 @@
 from typing import Any, Dict
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from .models import Filme
 from django.views.generic import TemplateView, ListView, DetailView
@@ -31,3 +32,10 @@ class Detalhesfilme(DetailView):
         filmes_relacionados = Filme.objects.filter(categoria=self.get_object().categoria)[0:5]
         context['filmes_relacionados'] = filmes_relacionados
         return context
+    
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+        # que filme o usuario esta a acessando?
+        filme  = self.get_object()
+        filme.vizualizacoes += 1
+        filme.save()
+        return super().get(request, *args, **kwargs)
