@@ -105,4 +105,5 @@
         path('filmes/', views.Homefilmes.as_view(), name='homefilmes'),
         path('filmes/<int:pk>', views.Detalhesfilme.as_view(), name='detalhesfilme')
         ]
+    <li>17° criar aquivo context.py ou novo_context.py inserir funções que retornam um lista na pagina html, ajustas setting.py  o 'context_processors': []></li>:
 </ol>
