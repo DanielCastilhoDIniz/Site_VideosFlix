@@ -39,3 +39,8 @@ class Detalhesfilme(DetailView):
         filme.vizualizacoes += 1
         filme.save()
         return super().get(request, *args, **kwargs)
+
+
+class pesquisa_filme(ListView):
+    template_name = "pesquisa.html"
+    model = Filme
