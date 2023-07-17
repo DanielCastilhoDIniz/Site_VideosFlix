@@ -1,4 +1,5 @@
 from typing import Any, Dict
+from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from .models import Filme
@@ -29,7 +30,7 @@ class Detalhesfilme(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(Detalhesfilme, self).get_context_data()
-        filmes_relacionados = Filme.objects.filter(categoria=self.get_object().categoria)[0:5]
+        filmes_relacionados = self.model.objects.filter(categoria=self.get_object().categoria)[0:5]
         context['filmes_relacionados'] = filmes_relacionados
         return context
     
@@ -41,6 +42,15 @@ class Detalhesfilme(DetailView):
         return super().get(request, *args, **kwargs)
 
 
-class pesquisa_filme(ListView):
+class Pesquisa_filme(ListView):
     template_name = "pesquisa.html"
     model = Filme
+
+    def get_queryset(self):
+        termo_pesquisa = self.request.GET.get('query')
+        if termo_pesquisa:
+            object_list = self.model.objects.filter(titulo__icontains=termo_pesquisa)
+            return object_list
+        else:
+            return None
+        return super().get_queryset()
