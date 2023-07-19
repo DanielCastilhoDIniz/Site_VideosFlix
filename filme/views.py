@@ -2,9 +2,10 @@ from typing import Any, Dict
 from django import http
 from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from .models import Filme
-from django.views.generic import TemplateView, ListView, DetailView
+from .forms import CriarContaForm
+from django.views.generic import TemplateView, ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -19,7 +20,7 @@ class Homepage(TemplateView):
         if request.user.is_authenticated:
             return redirect("filme:homefilmes")
         else:
-            return super().get(request, *args, **kwargs) # re-direciona para Homepage
+            return super().get(request, *args, **kwargs)  # re-direciona para Homepage
 
 
 # def homefilmes(request):
@@ -67,10 +68,18 @@ class Pesquisa_filme(LoginRequiredMixin, ListView):
         else:
             return None
 
-class PaginaPerfil(LoginRequiredMixin,TemplateView):
+
+class PaginaPerfil(LoginRequiredMixin, TemplateView):
     template_name = 'editarperfil.html'
 
-class CriarConta(TemplateView):
+
+class CriarConta(FormView):
     template_name = 'criarconta.html'
+    form_class = CriarContaForm
 
+    def form_valid(self, form: Any):
+        form.save()
+        return super().form_valid(form)
 
+    def  get_success_url(self):
+        return reverse('filme:login')
