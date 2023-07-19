@@ -12,4 +12,6 @@ urlpatterns = [
     path('pesquisa/', views.Pesquisa_filme.as_view(), name='pesquisa_filme'),
     path('login/', auth_view.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_view.LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('editarperfil/',  views.PaginaPerfil.as_view(template_name='editarperfil.html'), name='editarperfil'),
+    path('criarconta/',  views.CriarConta.as_view(template_name='criarconta.html'), name='criarconta'),
 ]
