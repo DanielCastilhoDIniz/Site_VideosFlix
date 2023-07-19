@@ -3,8 +3,8 @@ from django import http
 from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, reverse
-from .models import Filme
-from .forms import CriarContaForm
+from .models import Filme, Usuario
+from .forms import CriarContaForm, FormHomePage
 from django.views.generic import TemplateView, ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -13,14 +13,23 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 #     return render(request, "homepage.html")
 
 
-class Homepage(TemplateView):
+class Homepage(FormView):
     template_name = "homepage.html"
+    form_class = FormHomePage
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
         if request.user.is_authenticated:
             return redirect("filme:homefilmes")
         else:
             return super().get(request, *args, **kwargs)  # re-direciona para Homepage
+
+    def get_success_url(self):
+        email = self.request.POST.get("email")
+        usuario = Usuario.objects.filter(email=email)
+        if usuario:
+            return reverse( 'filme:login')
+        else:
+            return reverse( 'filme:criarconta')
 
 
 # def homefilmes(request):
@@ -81,5 +90,5 @@ class CriarConta(FormView):
         form.save()
         return super().form_valid(form)
 
-    def  get_success_url(self):
+    def get_success_url(self):
         return reverse('filme:login')
