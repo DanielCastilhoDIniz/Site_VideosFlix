@@ -1,7 +1,8 @@
 from typing import Any, Dict
+from django import http
 from django.db.models.query import QuerySet
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from .models import Filme
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,6 +14,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class Homepage(TemplateView):
     template_name = "homepage.html"
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+        if request.user.is_authenticated:
+            return redirect("filme:homefilmes")
+        else:
+            return super().get(request, *args, **kwargs) # re-direciona para Homepage
 
 
 # def homefilmes(request):

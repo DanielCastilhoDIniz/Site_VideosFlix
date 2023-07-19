@@ -7,22 +7,32 @@
             <img src="{% static 'images\castflix_logo.png' %}" alt="" class="w-6/12">
         </a>
     </div>
-
+    
     <div class="w-6/12 flex flex-nowrap justify-end">
+        {% if user.is_authenticated %}
         <div class="mr-2">
             <form action="{% url 'filme:pesquisa_filme' %}" method="get">
                 <input type="text" class="py-1 px-2 rounded-md text-black" name="query" placeholder="Pesquisar...">
                 <input type="submit" value="">
             </form>
         </div>
-
+        {% endif %}
         <div class="mr-2">
+            {% if user.is_authenticated %}
+            <a href="">
+                <button class="bg-red-600 text-white py-1 px-3 rounded-md">
+                    Sair
+                </button>
+            </a>
+            {% else %}
             <a href="">
                 <button class="bg-red-600 text-white py-1 px-3 rounded-md">
                     Login
                 </button>
             </a>
+            {% endif %}
         </div>
+        {% if user.is_authenticated %}
         <div class="mr-2">
             <a href="">
                 <button class="bg-red-600 text-white py-1 px-3 rounded-md">
@@ -30,7 +40,8 @@
                 </button>
             </a>
         </div>
-
+        {% endif %}
     </div>
+    
 
 </nav>

@@ -135,4 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'filme:homefilmes'
 
-LOGIN_URL = 'filme.login'
+LOGIN_URL = 'filme:login'
