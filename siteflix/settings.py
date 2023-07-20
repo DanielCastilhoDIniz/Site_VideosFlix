@@ -155,3 +155,6 @@ LOGIN_URL = 'filme:login'
 CRISPY_ALLOWED_TEMPLATES_PACKS = 'bootstrap5'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+
+PYTHON_VERSION = '3.11.3'
