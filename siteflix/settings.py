@@ -86,15 +86,15 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-# import dj_database_url
-# import os
+import dj_database_url
+import os
 
 
-# DATABASE_URL =os.getenv("DATABASE_URL")
-# if DATABASE_URL:
-#     DATABASE = {
-#         'default':dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
-#     }
+DATABASE_URL =os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    DATABASE = {
+        'default':dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
+    }
 
 
 # Password validation
