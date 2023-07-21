@@ -80,22 +80,25 @@ WSGI_APPLICATION = 'siteflix.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 import dj_database_url
 import os
 
+# Verifique se a variável de ambiente DATABASE_URL está definida
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-DATABASE_URL =os.getenv("DATABASE_URL")
+# Se DATABASE_URL estiver definida, use-a para configurar o banco de dados
 if DATABASE_URL:
-    DATABASE = {
-        'default':dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
+    DATABASES = {
+        'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
     }
-
+else:
+    # Se DATABASE_URL não estiver definida, use o banco de dados SQLite padrão
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
